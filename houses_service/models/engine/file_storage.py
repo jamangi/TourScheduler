@@ -2,6 +2,7 @@
 '''
     Define class FileStorage
 '''
+from datetime import datetime
 import json
 import models
 import models.engine.utility as util
@@ -70,15 +71,45 @@ class FileStorage:
         else:
             return len(self.all(cls))
 
-    def visit_count(self):
+    def join_tour(self, house_id, date, ip):
         '''
-            Sum all visits from all visitors
+            Join a house tour hour
         '''
-        sum = 0
-        all_visitors = self.__objects
-        for visitor in all_visitors.values():
-            sum += visitor.visits
-        return sum
+        time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        house = self.get('House', house_id)
+        if house is not None:
+            house.days_taken.append((time,ip))
+            return time
+        else:
+            return None
+
+    def leave_tour(self, house_id, date, ip):
+        '''
+            Remove a house tour hour for particular user
+        '''
+        time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        house = self.get('House', house_id)
+        hour = None
+        for visitor in house.days_taken:
+            vy = visitor[0].year
+            vm = visitor[0].month
+            vd = visitor[0].day
+            vh = visitor[0].hour
+            yy = time.year
+            ym = time.month
+            yd = time.day
+            yh = time.hour
+            if (vy == yy and vm == ym
+                and vd == yd and vh == yh
+                and visitor[1] == ip):
+                hour = visitor
+        if hour is not None:
+            house.days_taken.remove(visitor)
+            return time
+        else:
+            return None
+
+
 
     def save(self):
         '''

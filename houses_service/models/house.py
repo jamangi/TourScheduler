@@ -23,6 +23,7 @@ class House(BaseModel):
     price = 0
     lat = 0
     lon = 0
+    description = ''
 
 
     def update(self, **kwargs):

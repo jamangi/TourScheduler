@@ -2,7 +2,8 @@
 '''
     This module contains the routes for the visitor service
 '''
-from flask import Flask, jsonify, request
+from datetime import datetime
+from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 
 import models
@@ -41,21 +42,44 @@ def get_ip():
     """
         return ip of user
     """
-    pass
+    ip = {"ip": request.remote_addr}
 
-@app.route('/join_tour/<house_id>')
-def join_tour(house_id):
+    return jsonify(ip)
+
+@app.route('/join_tour/<house_id>/<time>')
+def join_tour(house_id, time):
     """
         ip joins a tour
     """
-    pass
+    try:
+        test = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
+    except Exception as e:
+        print(e)
+        abort(400, "date time format: %Y-%m-%dT%H:%M:%S")
+    ip = request.remote_addr
+    res = {"time": models.storage.join_tour(house_id, time, ip)}
+    if res["time"] is not None:
+        models.storage.save()
+        return jsonify(res)
+    else:
+        return jsonify({"error": "house not found"})
 
-@app.route('/leave_tour<house_id>')
-def leave_tour(house_id):
+@app.route('/leave_tour/<house_id>/<time>')
+def leave_tour(house_id, time):
     """
         ip leaves a tour
     """
-    pass
+    try:
+        test = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
+    except:
+        abort(400, "date time format: %Y-%m-%dT%H:%M:%S")
+    ip = request.remote_addr
+    res = {"time": models.storage.leave_tour(house_id, time, ip)}
+    if res["time"] is not None:
+        models.storage.save()
+        return jsonify(res)
+    else:
+        return jsonify({"error": "house or schedule not found"})
 
 
 @app.after_request
