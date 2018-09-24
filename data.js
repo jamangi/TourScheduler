@@ -6,7 +6,7 @@ let ipDiv = document.getElementById('ip')
 let houses = {};
 let myIp = '';
 // let service = 'http://localhost:7000/';
-let service = 'http://redtruck.services:7000/'
+let service = 'https://noblemansion.online/';
 let selectedHouse = null;
 
 let joinOrLeave = "join"
