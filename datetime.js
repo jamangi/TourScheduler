@@ -32,6 +32,9 @@ let times = document.getElementsByClassName('box time');
 for(let day of days) day.addEventListener('click', select);
 for(let hour of times) hour.addEventListener('click', select);
 
+let finalDate = document.getElementById('finalDate');
+let finalTime = document.getElementById('finalTime');
+
 //////// Navigation Functions ///////////
 function decrementMonth() {navigation = new Date(navYear, navMonth - 1, 1); n(); re();}
 function incrementMonth() {navigation = new Date(navYear, navMonth + 1, 1); n(); re();}
@@ -83,7 +86,7 @@ function select(){
         }
         else if (type === 't') {
             selectedHourId = id.substring(1);
-            selectedHour = document.getElementById(id)
+            selectedHour = document.getElementById(id);
         }
 
         addSpan(nextButton);
@@ -92,6 +95,14 @@ function select(){
         selectedEle.style.background = "darkblue";
         selectedEle.style.opacity = "0.7";
         
+        // finalDate.innerHTML = navYear + '-' + navMonth + '-' + selectedDayId;
+        finalDate.innerHTML = new Date(navYear, navMonth, selectedDayId).toDateString();
+
+        let suffix = selectedHourId > 11 ? 'pm' : 'am';
+        let modulus = selectedHourId % 12;
+
+        if (modulus === 0) modulus = 12;
+        finalTime.innerHTML = modulus + suffix;
     } else u();
 }
 

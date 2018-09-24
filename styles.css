@@ -69,7 +69,7 @@ aside img {
 max-width: 95%; max-height: 99%; opacity: 1;
 transition: opacity 500ms; vertical-align: middle;
 }
-#confirmSpace {height: 45%;}
+.horizontalSpace {height: 45%; color:white; text-shadow: 1px 1px darkblue; }
 
 
 .box:hover {background: green; opacity: .8;}
@@ -91,3 +91,6 @@ transition: opacity 500ms; vertical-align: middle;
 #next {border-left: 10px solid darkred; float:right;}
 #backButton {position: absolute; left: 20%;cursor: pointer;}
 #confirmButton {position: absolute; left: 80%;cursor: pointer;}
+
+/*#finalDate{border: 1px solid orange;}
+#finalTime{border: 1px dotted blue;}*/
