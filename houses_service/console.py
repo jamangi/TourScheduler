@@ -223,8 +223,8 @@ class House_TourCommand(cmd.Cmd):
         '''
         pairs = [arg.split('=') for arg in args[1:]]
         for pair in pairs:
-            if '_' in pair[1]:
-                pair[1] = pair[1].replace('_', ' ')
+        #     if '_' in pair[1]:
+        #         pair[1] = pair[1].replace('_', ' ')
             try:
                 if '[' in pair[1] or '(' in pair[1]:
                     pair[1] = json.loads(pair[1])

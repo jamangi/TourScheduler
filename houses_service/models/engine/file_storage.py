@@ -71,25 +71,12 @@ class FileStorage:
         else:
             return len(self.all(cls))
 
-    def join_tour(self, house_id, date, ip):
+    def find_tourist(self, house_id, date, ip):
         '''
-            Join a house tour hour
-        '''
-        time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
-        house = self.get('House', house_id)
-        if house is not None:
-            house.days_taken.append((time,ip))
-            return time
-        else:
-            return None
-
-    def leave_tour(self, house_id, date, ip):
-        '''
-            Remove a house tour hour for particular user
+            Checks to see if a tourist is scheduled at given time
         '''
         time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
         house = self.get('House', house_id)
-        hour = None
         for visitor in house.days_taken:
             vy = visitor[0].year
             vm = visitor[0].month
@@ -102,8 +89,33 @@ class FileStorage:
             if (vy == yy and vm == ym
                 and vd == yd and vh == yh
                 and visitor[1] == ip):
-                hour = visitor
-        if hour is not None:
+                    return visitor
+            return None
+
+
+    def join_tour(self, house_id, date, ip):
+        '''
+            Join a house tour hour
+        '''
+        time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        house = self.get('House', house_id)
+        if house is not None:
+            visitor = self.find_tourist(house_id, date, ip)
+            if visitor is None:
+                house.days_taken.append((time,ip))
+                return time
+            else:
+                return time
+        return None
+
+    def leave_tour(self, house_id, date, ip):
+        '''
+            Remove a house tour hour for particular user
+        '''
+        time = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        house = self.get('House', house_id)
+        visitor = self.find_tourist(house_id, date, ip)
+        if visitor is not None:
             house.days_taken.remove(visitor)
             return time
         else:

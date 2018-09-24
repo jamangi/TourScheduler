@@ -23,7 +23,7 @@ article section p {padding-left: 3%;}
     box-sizing: border-box;
     padding-top: 2%;
 }
-footer, #finalCancel, #finalConfirm {text-align: center; padding-top:2%; color: white; text-shadow: 1px 1px #ff0000;}
+footer, #finalCancel, #finalConfirm {text-align: center; padding-top:2%; color: white; text-shadow: 1px 1px darkred;}
 
 img {border-radius: 1%;}
 aside {text-align: center;}
@@ -43,9 +43,9 @@ section img {max-height: 75%; max-width: 75%; margin-top: 1%;}
 header {font-size: 120%;}
 a {text-decoration: none; color: lightgray; font-weight: bold;}
 
-#footerlogo {height:75%; width:20%; float:left;}
-#footerlogo img {max-height: 100%; max-width: 100%;}
-.tour {width: 80%; text-align: right; cursor:pointer;}
+#footerLogo {height:75%; width:20%; float:left; cursor: pointer;}
+#footerLogo img {max-height: 100%; max-width: 100%;}
+.tour {width: 80%; text-align: right; cursor:pointer; color: white; font-weight: bold; text-shadow: 1px 1px darkblue;}
 
 /*           Calandar Functionality                */
 
@@ -66,8 +66,8 @@ aside#time.confirm {width: 0%; height: 0%; display:none;}
 aside#confirm.confirm {width: 40%; height: 100%; display:block; background:darkgray;float:left;color:black;}
 aside#confirmImg.confirm {width: 60%; height: 100%; display:block; background:darkblue;}
 aside img { 
-max-width: 95%; max-height: 99%; opacity: 1;
-transition: opacity 500ms; vertical-align: middle;
+    max-width: 95%; max-height: 99%; opacity: 1;
+    transition: opacity 500ms; vertical-align: middle;
 }
 .horizontalSpace {height: 45%; color:white; text-shadow: 1px 1px darkblue; }
 
@@ -89,11 +89,14 @@ transition: opacity 500ms; vertical-align: middle;
 #last, #next {border: 10px solid transparent; width: 0%; cursor: pointer;}
 #last {border-right: 10px solid darkred; float:left;}
 #next {border-left: 10px solid darkred; float:right;}
-#backButton {position: absolute; left: 20%;cursor: pointer;}
-#confirmButton {position: absolute; left: 80%;cursor: pointer;}
+#backButton {position: absolute; left: 20%; top: 95%; cursor: pointer;}
+#confirmButton {position: absolute; left: 80%; top: 95%;cursor: pointer;}
 
 /*#finalDate{border: 1px solid orange;}
 #finalTime{border: 1px dotted blue;}*/
 
 #finalConfirm {cursor: pointer;}
 #finalCancel {cursor: pointer;}
+#ip {position: relative; left: 20%; top: 30%; 
+    color: white; text-shadow: 1px 1px #ff0000;
+    width: 50%;}

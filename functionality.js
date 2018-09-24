@@ -8,15 +8,14 @@ let structure = [article, asideDays, asideHours, asideConfirm, asideConfirmImg];
 
 let title = document.getElementById("title");
 let dateNav = document.getElementById("dateNav")
-let backButton = document.getElementById("backButton");         backButton.addEventListener('click', goBack);
+let backButton = document.getElementById("backButton");      backButton.addEventListener('click', goBack);
 let nextButton = document.getElementById("confirmButton");   nextButton.addEventListener('click', confirm);
 let navSection = [title, dateNav, backButton, nextButton]
 
+let footerLogo = document.getElementById("footerLogo");  footerLogo.addEventListener('click', viewHome);
+
 let view = "home";
 
-for (let button of tourbuttons) {
-    button.addEventListener('click', viewDays);
-}
 
 viewHome();
 
@@ -38,22 +37,24 @@ function appendClass(cls) {
     }
 }
 
-function viewHome()     {clearClasses(); appendClass('home'); navSet();}
-function viewDays()     {clearClasses(); appendClass('days'); navSet();}
+function viewHome()     {clearClasses(); appendClass('home'); navSet(); u();}
+function viewDays()     {clearClasses(); appendClass('days'); navSet(); h();}
 function viewTime()     {clearClasses(); appendClass('time'); navSet();}
-function viewConfirm()  {clearClasses(); appendClass('confirm'); navSet();}
+function viewConfirm()  {
+    clearClasses(); appendClass('confirm'); navSet();
+    let sideImg = document.getElementById('sideImg');
+    sideImg.setAttribute('src', houses[selectedHouse].photo);
+}
 
 function goBack(){
     if (view === "confirm") viewTime();
     else if (view === "time") viewDays();
     else if (view === "days") viewHome();
-    u();
 }
 
 function confirm(){
     if (view === "days") viewTime();
     else if (view === "time") viewConfirm();
-    else if (view === "confirm") viewTime();
 }
 
 function navClear() {
@@ -63,10 +64,13 @@ function navClear() {
 
 function navSet() {
     navClear();
-    if (view === "home")            {addBlock(title); addBlock(dateNav);}
+    if (view === "home")            {addBlock(title);}
     else if (view === "days")       {addBlock(title); addBlock(dateNav); addSpan(backButton);}
     else if (view === "time")       {addBlock(title); addSpan(backButton);}
     else if (view === "confirm")    {addBlock(title); addSpan(backButton);}
+
+    if (view === "days" && selectedDay) addSpan(confirmButton);
+    if (view === "time" && selectedHour) addSpan(confirmButton);
 }
 
 ///// footer navigation ////

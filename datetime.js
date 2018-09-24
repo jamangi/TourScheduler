@@ -36,30 +36,56 @@ let finalDate = document.getElementById('finalDate');
 let finalTime = document.getElementById('finalTime');
 
 //////// Navigation Functions ///////////
-function decrementMonth() {navigation = new Date(navYear, navMonth - 1, 1); n(); re();}
-function incrementMonth() {navigation = new Date(navYear, navMonth + 1, 1); n(); re();}
+function decrementMonth() {navigation = new Date(navYear, navMonth - 1, 2); n(); re(); u(); h();}
+function incrementMonth() {navigation = new Date(navYear, navMonth + 1, 2); n(); re(); u(); h();}
+
+function h(){
+    // highlight slots taken by other people
+        let days_taken = houses[selectedHouse].days_taken;
+        for (let d of days_taken){
+            let date = new Date(d[0]);
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let hour = date.getHours();
+            let takenIp = d[1];
+            // console.log(year +" "+month +" "+day + " "+hour)
+
+            if(navYear === year && navMonth === month) {
+                let takenEle = document.getElementById("d"+day);
+                takenEle.style.background = "purple";
+            }
+        }
+}
+
+function highlightTaken(){h();}
 
 function n(){
+    // update navigation variables
     navYear = navigation.getFullYear(); 
     navMonth = navigation.getMonth();
+    console.log("month: "+myMonth)
     navDay = navigation.getDate();
 }
 
 function re(){
+    // redraw year and month on navigation
     yearEle.innerHTML = navYear;
     monthEle.innerHTML = navigation.toDateString().split(' ')[1];
 }
 
 function u(){
-
-    if (view === "time" && selectedHour !== null){
+    for (let day of days)
+        day.style.background = "none";
+    // unselect
+    if ((view === "time" || view === "home") && selectedHour !== null){
         selectedHour.style.background = "none";
         selectedHour.style.opacity = "1";
         selectedHour = null;
         selectedHourId = null;
     }
 
-    if (view === "days" && selectedDay !== null){
+    if ((view === "days" || view === "home") && selectedDay !== null){
         selectedDay.style.background = "none";
         selectedDay.style.opacity = "1";
         selectedDay = null;
