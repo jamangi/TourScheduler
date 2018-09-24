@@ -11,12 +11,12 @@ let selectedHouse = null;
 finalConfirmButton.addEventListener("click", finalConfirm);
 finalCancelButton.addEventListener("click", goBack);
 
-useRoute('get_ip', setMyIp);
-useRoute('houses', setHouses);
+useRoute('get_ip', [setMyIp]);
+useRoute('houses', [setHouses]);
 
 function update(data){for (let house of data) houses[house.id] = house;}
 function autoUpdate(){
-    useRoute('houses', update);
+    useRoute('houses', [update, h]);
 }
 
 function setMyIp(data) {myIp = data.ip; ipDiv.innerHTML = "ip: " + data.ip;}
@@ -55,10 +55,27 @@ function tourHouse() {
     viewDays();
 }
 
+function alreadyRegistered() {
+    let days_taken = houses[selectedHouse].days_taken;
+    for (let d of days_taken){
+        let date = new Date(d[0]);
+        let finalDate = new Date(navYear, navMonth, selectedDayId, selectedHourId)
+        // console.log(date.toString() + " <> " + finalDate.toString())
+        if (date.toString() == finalDate.toString()){
+            console.log("I'm here already");
+            console.log("myIp: "+ myIp + " regiIp: "+d[1])
+            return true;
+        }
+    }
+    console.log("no match: " + finalDate.toString())
+    return false
+}
+
 function finalConfirm() {
     let houseId = selectedHouse;
-    let scheduledTime = '' + navYear +'-'+ navMonth +'-'+ selectedDayId + "T" + selectedHourId + ":00:00"
-    useRoute('join_tour', join_leave("join"), [houseId, scheduledTime])
+    let navMonthFix = navMonth + 1;
+    let scheduledTime = '' + navYear +'-'+ navMonthFix +'-'+ selectedDayId + "T" + selectedHourId + ":00:00"
+    useRoute('join_tour', [join_leave("join")], [houseId, scheduledTime])
 }
 
 
@@ -77,17 +94,18 @@ function join_leave(choice) {
 }
 
 
-function useRoute(route, callback, args){
+function useRoute(route, callbacks, args){
     let xhttp = new XMLHttpRequest();
     let url = service + route;
     if (args)
         for (let arg of args)
             url += "/" + arg;
-    console.log("url: " + url);
+    // console.log("url: " + url);
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let info = JSON.parse(this.responseText)
-            callback(info)
+            for(let callback of callbacks)
+                callback(info)
         }
     }
     xhttp.open("GET", url, true);
@@ -108,4 +126,4 @@ function dummyDesc(){
             artis est-ad ea principia, quae accepimus.`
 }
 
-setInterval(autoUpdate, 10000)
+setInterval(autoUpdate, 7000)

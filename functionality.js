@@ -17,7 +17,7 @@ let footerLogo = document.getElementById("footerLogo");  footerLogo.addEventList
 let view = "home";
 
 
-viewHome();
+// viewHome();
 
 
 function clearClasses() {
@@ -39,11 +39,12 @@ function appendClass(cls) {
 
 function viewHome()     {clearClasses(); appendClass('home'); navSet(); u();}
 function viewDays()     {clearClasses(); appendClass('days'); navSet(); h();}
-function viewTime()     {clearClasses(); appendClass('time'); navSet();}
+function viewTime()     {clearClasses(); appendClass('time'); navSet(); h();}
 function viewConfirm()  {
     clearClasses(); appendClass('confirm'); navSet();
     let sideImg = document.getElementById('sideImg');
     sideImg.setAttribute('src', houses[selectedHouse].photo);
+    alreadyRegistered();
 }
 
 function goBack(){
