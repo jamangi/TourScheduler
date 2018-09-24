@@ -23,7 +23,7 @@ article section p {padding-left: 3%;}
     box-sizing: border-box;
     padding-top: 2%;
 }
-footer {text-align: center; padding-top:2%; color: white; text-shadow: 1px 1px #ff0000;}
+footer, #finalCancel, #finalConfirm {text-align: center; padding-top:2%; color: white; text-shadow: 1px 1px #ff0000;}
 
 img {border-radius: 1%;}
 aside {text-align: center;}
@@ -64,12 +64,12 @@ aside#confirm.days {width: 0%; height: 0%; display:none;}
 aside#day.confirm {width: 0%; height: 0%; opacity:1; display:none;}
 aside#time.confirm {width: 0%; height: 0%; display:none;}
 aside#confirm.confirm {width: 40%; height: 100%; display:block; background:darkgray;float:left;color:black;}
-aside#confirm_img.confirm {width: 60%; height: 100%; display:block; background:darkblue;}
+aside#confirmImg.confirm {width: 60%; height: 100%; display:block; background:darkblue;}
 aside img { 
 max-width: 95%; max-height: 99%; opacity: 1;
 transition: opacity 500ms; vertical-align: middle;
 }
-#confirm_space {height: 45%;}
+#confirmSpace {height: 45%;}
 
 
 .box:hover {background: green; opacity: .8;}
@@ -77,7 +77,7 @@ transition: opacity 500ms; vertical-align: middle;
 .box.time {height: calc(100% / 6); width: calc(100% / 4); border: 1px solid pink; float:left; box-sizing: border-box;}
 
 
-#month_navigation {
+#monthNavigation {
     /*border: 1px solid darkred;*/
     width: 70%;
     height: 40%;
@@ -86,7 +86,8 @@ transition: opacity 500ms; vertical-align: middle;
 }
 
 
-#last, #next {border: 10px solid transparent; width: 0%;}
+#last, #next {border: 10px solid transparent; width: 0%; cursor: pointer;}
 #last {border-right: 10px solid darkred; float:left;}
 #next {border-left: 10px solid darkred; float:right;}
-#back {position: absolute; left: 20%;}
+#backButton {position: absolute; left: 20%;cursor: pointer;}
+#confirmButton {position: absolute; left: 80%;cursor: pointer;}
