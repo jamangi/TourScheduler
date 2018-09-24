@@ -5,7 +5,8 @@ let ipDiv = document.getElementById('ip')
 
 let houses = {};
 let myIp = '';
-let service = 'http://localhost:7000/';
+// let service = 'http://localhost:7000/';
+let service = 'http://redtruck.services:7000/'
 let selectedHouse = null;
 
 let joinOrLeave = "join"
@@ -39,7 +40,7 @@ function setHouses(data) {
         img.setAttribute('src', house.photo);
         desc.innerHTML = dummyDesc();
         tourDiv.setAttribute('class', 'tour');
-        tourDiv.innerHTML = "Tour House";
+        tourDiv.innerHTML = "Tour Property";
         tourDiv.addEventListener('click', tourHouse);
 
         imgDiv.append(img)

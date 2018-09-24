@@ -97,6 +97,6 @@ aside img {
 
 #finalConfirm {cursor: pointer;}
 #finalCancel {cursor: pointer;}
-#ip {position: relative; left: 20%; top: 30%; 
+#ip {position: relative; left: 15%; top: 30%; 
     color: white; text-shadow: 1px 1px #ff0000;
-    width: 50%;}
+    width: 60%; font-size: 80%;}

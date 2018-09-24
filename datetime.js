@@ -69,14 +69,14 @@ function h(data){
     let start = new Date(duration[0]);
     let startStart = new Date(start.getFullYear(), start.getMonth(), 1)
     let end = new Date(duration[1]);
-    let endEnd = new Date(end.getFullYear(), end.getMonth + 1, 0)
+    let endEnd = new Date(end.getFullYear(), end.getMonth() + 1, 0)
 
     if (start.getFullYear() > navYear || start.getMonth() > navMonth) allGray();
-    if (end.getFullYear() < navYear || end.getMonth < navMonth) allGray();
+    if (end < navigation) allGray();
     if (start.getFullYear() == navYear && start.getMonth() == navMonth)
         gray(startStart.getDate(), start.getDate() - 1);
     if (end.getFullYear() == navYear && end.getMonth() == navMonth)
-        gray(end.getDate() + 1, endEnd.getDate());
+        gray(end.getDate() + 1, 31);
 }
 
 function inDuration(targetDay) {
