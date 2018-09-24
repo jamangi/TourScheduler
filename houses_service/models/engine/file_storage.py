@@ -89,8 +89,10 @@ class FileStorage:
             if (vy == yy and vm == ym
                 and vd == yd and vh == yh
                 and visitor[1] == ip):
+                    print("match {} == {}".format(time, visitor[0]))
                     return visitor
-            return None
+        print("no match {} != {}".format(time, visitor[0]))
+        return None
 
 
     def join_tour(self, house_id, date, ip):

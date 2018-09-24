@@ -8,6 +8,8 @@ let myIp = '';
 let service = 'http://localhost:7000/';
 let selectedHouse = null;
 
+let joinOrLeave = "join"
+
 finalConfirmButton.addEventListener("click", finalConfirm);
 finalCancelButton.addEventListener("click", goBack);
 
@@ -38,6 +40,7 @@ function setHouses(data) {
         desc.innerHTML = dummyDesc();
         tourDiv.setAttribute('class', 'tour');
         tourDiv.innerHTML = "Tour House";
+        tourDiv.addEventListener('click', tourHouse);
 
         imgDiv.append(img)
         section.append(h1Addr); section.append(imgDiv); 
@@ -45,13 +48,12 @@ function setHouses(data) {
         article.append(section);
     }
 
-    for (let button of tourbuttons)
-        button.addEventListener('click', tourHouse);
     
 }
 
 function tourHouse() {
     selectedHouse = this.parentElement.getAttribute("data-houseId");
+    u();
     viewDays();
 }
 
@@ -61,21 +63,28 @@ function alreadyRegistered() {
         let date = new Date(d[0]);
         let finalDate = new Date(navYear, navMonth, selectedDayId, selectedHourId)
         // console.log(date.toString() + " <> " + finalDate.toString())
-        if (date.toString() == finalDate.toString()){
+        if ((date.toString() == finalDate.toString()) && (myIp === d[1])){
             console.log("I'm here already");
-            console.log("myIp: "+ myIp + " regiIp: "+d[1])
+            console.log("myIp: "+ myIp + " regiIp: "+d[1]);
+            joinOrLeave = "leave";
+            finalConfirmButton.innerHTML = "Leave"
+            finalMethod.innerHTML = "Leave Tour:"
             return true;
         }
     }
-    console.log("no match: " + finalDate.toString())
+    // console.log("no match: " + finalDate.toString())
+    joinOrLeave = "join";
+    finalConfirmButton.innerHTML = "Confirm";
+    finalMethod.innerHTML = "Join Tour:";
     return false
 }
 
 function finalConfirm() {
     let houseId = selectedHouse;
     let navMonthFix = navMonth + 1;
-    let scheduledTime = '' + navYear +'-'+ navMonthFix +'-'+ selectedDayId + "T" + selectedHourId + ":00:00"
-    useRoute('join_tour', [join_leave("join")], [houseId, scheduledTime])
+    let scheduledTime = '' + navYear +'-'+ navMonthFix +'-'+ selectedDayId + "T" + selectedHourId + ":00:00";
+    useRoute(joinOrLeave+'_tour', [join_leave(joinOrLeave)], [houseId, scheduledTime]);
+    u();
 }
 
 
@@ -87,7 +96,7 @@ function join_leave(choice) {
             else
                 alert("You're not signed up for that slot.")
         else
-            console.log(choice + " successful");
+            // console.log(choice + " successful");
         viewHome();
     }
     return alarm;

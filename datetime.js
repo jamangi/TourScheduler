@@ -118,6 +118,8 @@ function re(){
 function u(){
     for (let day of days)
         day.style.background = "none";
+    for (let time of times)
+        time.style.background = "none";
     // unselect
     if ((view === "time" || view === "home") && selectedHour !== null){
         selectedHour.style.background = "none";

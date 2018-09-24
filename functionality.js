@@ -1,4 +1,3 @@
-let tourbuttons = document.getElementsByClassName('tour');
 let article = document.getElementById('article');
 let asideDays = document.getElementById('day');
 let asideHours = document.getElementById('time');
