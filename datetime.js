@@ -102,7 +102,7 @@ function select(){
         let modulus = selectedHourId % 12;
 
         if (modulus === 0) modulus = 12;
-        finalTime.innerHTML = modulus + suffix;
+        finalTime.innerHTML = modulus + suffix + "?";
     } else u();
 }
 

@@ -94,3 +94,6 @@ transition: opacity 500ms; vertical-align: middle;
 
 /*#finalDate{border: 1px solid orange;}
 #finalTime{border: 1px dotted blue;}*/
+
+#finalConfirm {cursor: pointer;}
+#finalCancel {cursor: pointer;}
