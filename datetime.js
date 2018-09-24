@@ -4,18 +4,18 @@ let myMonth = myDate.getMonth();
 let myDay = myDate.getDate();
 
 let navigation = new Date(myYear, myMonth, 1);
-let navYear; // doubles as selected year
-let navMonth; // doubles as selected month
-let navDay;
+let navYear = null; // doubles as selected year
+let navMonth = null; // doubles as selected month
+let navDay = null;
 
 let selection = new Date();
 
-let selectedDay;
-let selectedHour;
-let selectedDayId;
-let selectedHourId;
+let selectedDay = null;
+let selectedHour = null;
+let selectedDayId = null;
+let selectedHourId = null;
 
-let selectedEle;
+let selectedEle = null;
 let hoursSelected = 0;
 /////////  HTML Elements  /////////////
 let yearEle = document.getElementById("year")
@@ -29,8 +29,8 @@ re();
 
 let days = document.getElementsByClassName('box day');
 let times = document.getElementsByClassName('box time');
-for(let day of days) day.addEventListener('click', selectDay);
-for(let hour of times) hour.addEventListener('click', selectHour);
+for(let day of days) day.addEventListener('click', select);
+for(let hour of times) hour.addEventListener('click', select);
 
 //////// Navigation Functions ///////////
 function decrementMonth() {navigation = new Date(navYear, navMonth - 1, 1); n(); re();}
@@ -48,17 +48,21 @@ function re(){
 }
 
 function u(){
-    if (selectedDay !== undefined && selectedHour === undefined){
-        selectedDay.style.background = "none";
-        selectedDay = undefined;
-        selectedDayId = undefined;
+
+    if (view === "time" && selectedHour !== null){
+        selectedHour.style.background = "none";
+        selectedHour.style.opacity = "1";
+        selectedHour = null;
+        selectedHourId = null;
     }
 
-    if (selectedHour !== undefined){
-        selectedHour.style.background = "none";
-        selectedHour = undefined;
-        selectedHourId = undefined;
+    if (view === "days" && selectedDay !== null){
+        selectedDay.style.background = "none";
+        selectedDay.style.opacity = "1";
+        selectedDay = null;
+        selectedDayId = null;
     }
+
 
     remove(nextButton);
 }
@@ -66,24 +70,30 @@ function u(){
 
 function colorSelected(){}
 
-function selectDay(){
+function select(){
     u();
-    let id = this.getAttribute('id')    
+
+    let id = this.getAttribute('id');
     if (id !== null){
-        selectedDayId = id.substring(1);
+        let num = id.substring(1);
+        let type = id.substring(0, 1);
+        if (type === 'd') {
+            selectedDayId = num;
+            selectedDay = document.getElementById(id)
+        }
+        else if (type === 't') {
+            selectedHourId = id.substring(1);
+            selectedHour = document.getElementById(id)
+        }
+
         addSpan(nextButton);
         selectedEle = document.getElementById(id);
-
-        selectedDay = document.getElementById(id);
-        selectedDay.style.background = "darkblue";
-        selectedDay.style.opacity = "0.8";
+        selectedEle = document.getElementById(id);
+        selectedEle.style.background = "darkblue";
+        selectedEle.style.opacity = "0.7";
+        
     } else u();
 }
 
-function selectHour(){
-    let id = this.getAttribute('id') 
-    selectedHourId = this.getAttribute('id').substring(1);
-    addSpan(nextButton);
-}
 
 function unselect(){u();}

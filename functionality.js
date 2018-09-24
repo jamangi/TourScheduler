@@ -44,10 +44,10 @@ function viewTime()     {clearClasses(); appendClass('time'); navSet();}
 function viewConfirm()  {clearClasses(); appendClass('confirm'); navSet();}
 
 function goBack(){
-    u();
-    if (view === "confirm") viewDays();
+    if (view === "confirm") viewTime();
     else if (view === "time") viewDays();
     else if (view === "days") viewHome();
+    u();
 }
 
 function confirm(){
