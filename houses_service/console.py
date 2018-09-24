@@ -55,6 +55,7 @@ class House_TourCommand(cmd.Cmd):
             print(new_instance.id)
 
         except Exception as e:
+            print(e)
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -235,6 +236,7 @@ class House_TourCommand(cmd.Cmd):
                 #pair[1] = eval(pair[1])
             except Exception as e:
                 pass
+        print(pairs)
         return dict(pairs)
 
 if __name__ == "__main__":

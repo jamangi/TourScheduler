@@ -28,7 +28,7 @@ class House(BaseModel):
 
     def update(self, **kwargs):
         duration = kwargs["duration"]
-        days = kwargs["days_taken"]
+        days = [] if kwargs.get("days_taken") is None else kwargs.get("days_taken")
         duration_start = datetime.strptime(duration[0], "%Y-%m-%dT%H:%M:%S")
         duration_end = datetime.strptime(duration[1], "%Y-%m-%dT%H:%M:%S")
         days_taken = [(datetime.strptime(x,"%Y-%m-%dT%H:%M:%S"),y) for x,y in days]
