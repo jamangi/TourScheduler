@@ -4,4 +4,4 @@ Schedule a time to tour a house.
 
 Experimentation with mobile development
 
-[!demo](https://github.com/jamangi/TourScheduler/blob/master/images/mobilehouses.gif)
+![demo](https://github.com/jamangi/TourScheduler/blob/master/images/mobilehouses.gif)
