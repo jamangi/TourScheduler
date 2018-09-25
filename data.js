@@ -136,4 +136,4 @@ function dummyDesc(){
             artis est-ad ea principia, quae accepimus.`
 }
 
-setInterval(autoUpdate, 7000)
+//setInterval(autoUpdate, 7000)
